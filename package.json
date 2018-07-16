@@ -41,8 +41,8 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "babel-preset-flow": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "bootstrap": "^4.1.1",
     "css-loader": "^0.28.11",
@@ -68,6 +68,7 @@
     "rollbar": "^2.4.2",
     "sequelize": "^4.37.10",
     "sequelize-cli": "^4.0.0",
+    "sqlite3": "^4.0.2",
     "style-loader": "^0.21.0",
     "umzug": "^2.1.0",
     "webpack": "^4.10.2"
