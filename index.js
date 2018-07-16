@@ -12,12 +12,16 @@ import middleware from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
+import Rollbar from 'rollbar';
+
 import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
 
 import webpackConfig from './webpack.config';
 import addRoutes from './routes';
 import container from './container';
+
+const rollbar = new Rollbar(process.env.ROLLBAR_TOKEN);
 
 export default () => {
   const app = new Koa();
@@ -54,6 +58,27 @@ export default () => {
   app.use(router.allowedMethods());
   app.use(router.routes());
 
+  app.use(async (ctx, next) => {
+    try {
+      await next();
+
+      if (ctx.response.status === 404 && !ctx.response.body) {
+        ctx.throw(404);
+      }
+    } catch (err) {
+      console.log(err);
+
+      ctx.status = err.status || 500;
+      ctx.body = err.message;
+      ctx.app.emit('error', err, ctx);
+    }
+  });
+
+  app.on('error', (err) => {
+    console.log(err);
+    rollbar.log(err);
+  });
+
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
     noCache: process.env.NODE_ENV === 'development',
@@ -68,5 +93,7 @@ export default () => {
     ],
   });
   pug.use(app);
+
+
   return app;
 };
