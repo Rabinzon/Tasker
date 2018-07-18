@@ -22,6 +22,7 @@
     "flow-typed": "flow-typed",
     "start": "gulp server --gulpfile gulpfile.babel.js",
     "eslint": "eslint",
+    "lint": "eslint .",
     "webpack": "webpack",
     "build": "npm run webpack -- -p --env production",
     "postinstall": "npm run build"

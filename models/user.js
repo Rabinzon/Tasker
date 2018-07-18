@@ -33,7 +33,7 @@ export default (sequelize, DataTypes) => {
       fullName() {
         return `${this.firstName} ${this.lastName}`;
       },
-      associate(models) {
+      associate() {
         // associations can be defined here
       },
     },
