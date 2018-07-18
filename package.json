@@ -20,23 +20,24 @@
     "babel-node": "babel-node",
     "flow": "flow",
     "flow-typed": "flow-typed",
-    "start": "gulp server",
+    "start": "gulp server --gulpfile gulpfile.babel.js",
     "eslint": "eslint",
     "webpack": "webpack",
-    "build": "npm run webpack -- -p --env production && babel src --out-dir dist --source-maps inline",
+    "build": "npm run webpack -- -p --env production",
     "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hexlet-boilerplates/nodejs-package.git"
   },
-  "author": "Kirill Mokevnin",
+  "author": "Ildar Gilfanov",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hexlet-boilerplates/nodejs-package/issues"
   },
   "homepage": "https://github.com/hexlet-boilerplates/nodejs-package#readme",
   "dependencies": {
+    "@babel/register": "^7.0.0-beta.54",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
@@ -70,12 +71,14 @@
     "sqlite3": "^4.0.2",
     "style-loader": "^0.21.0",
     "umzug": "^2.1.0",
-    "webpack": "^4.10.2"
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-jest": "^23.0.1",
+    "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-babel": "^5.1.0",
@@ -88,6 +91,7 @@
     "jest-cli": "^23.1.0",
     "jest-supertest-matchers": "0.0.1",
     "nodemon": "^1.17.5",
+    "postcss-loader": "^2.1.6",
     "supertest": "^3.1.0"
   }
 }

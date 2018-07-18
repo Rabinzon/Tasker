@@ -1,4 +1,4 @@
-# koa-nodejs-application
+# app-tasker
 
 [![Code Climate](https://codeclimate.com/github/hexlet-boilerplates/koa-nodejs-application/badges/gpa.svg)](https://codeclimate.com/github/hexlet-boilerplates/koa-nodejs-application)
 [![Issue Count](https://codeclimate.com/github/hexlet-boilerplates/koa-nodejs-application/badges/issue_count.svg)](https://codeclimate.com/github/hexlet-boilerplates/koa-nodejs-application)
