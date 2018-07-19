@@ -44,7 +44,7 @@ export default () => {
     }
     return null;
   }));
-  app.use(serve(path.join(__dirname, '..', 'public')));
+  app.use(serve(path.join(__dirname, 'public')));
 
   if (process.env.NODE_ENV !== 'production') {
     app.use(middleware({

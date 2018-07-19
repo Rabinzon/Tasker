@@ -1,3 +1,7 @@
 import getServer from '../';
 
-getServer().listen(process.env.PORT || 3000);
+const port = process.env.PORT || 3000;
+
+getServer().listen(port, () => {
+  console.log(`server listen on port ::${port}`);
+});
