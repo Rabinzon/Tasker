@@ -1,6 +1,5 @@
 import path from 'path';
 // import webpack from 'webpack';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
