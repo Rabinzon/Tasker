@@ -32,18 +32,14 @@ export default () => {
   app.use(async (ctx, next) => {
     ctx.state = {
       flash: ctx.flash,
+      userId: ctx.session.userId,
+      userAvatar: ctx.session.userAvatar,
       isSignedIn: () => ctx.session.userId !== undefined,
     };
     await next();
   });
   app.use(bodyParser());
-  app.use(methodOverride((req) => {
-    // return req?.body?._method;
-    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-      return req.body._method; // eslint-disable-line
-    }
-    return null;
-  }));
+  app.use(methodOverride('_method'));
   app.use(serve(path.join(__dirname, 'public')));
 
   if (process.env.NODE_ENV !== 'production') {
@@ -76,7 +72,9 @@ export default () => {
 
   app.on('error', (err) => {
     console.log(err);
-    rollbar.log(err);
+    if (process.env.NODE_ENV === 'production') {
+      rollbar.log(err);
+    }
   });
 
   const pug = new Pug({

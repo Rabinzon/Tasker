@@ -1,8 +1,10 @@
 import path from 'path';
 // import webpack from 'webpack';
 
+const mode = (process.env.NODE_ENV === 'test' && 'development') || process.env.NODE_ENV || 'development';
+
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',
+  mode,
   entry: ['./src/index.js'],
   output: {
     path: path.join(__dirname, 'public', 'assets'),
@@ -19,6 +21,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
       },
     ],
   },

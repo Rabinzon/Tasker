@@ -6,27 +6,41 @@ html(lang="en")
     title= Title
     script(src='/assets/main.js')
   body
-    nav.navbar.navbar-expand-lg.navbar-light.bg-faded
-      a.navbar-brand(href="/") Task Manager
-      button.navbar-toggler(data-toggle="collapse" data-target="#navbarSupportedContent")
-        span.navbar-toggler-icon
-      .collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href=urlFor('users')) Users
-        ul.navbar-nav
+    .navbar-wrapper
+      nav.navbar.navbar-expand-lg.navbar-light.bg-faded
+        a.navbar-brand(href="/")
+          i.fas.fa-cookie.mr-md-2
+          | Task Manager
+        button.navbar-toggler(data-toggle="collapse" data-target="#navbarSupportedContent")
+          span.navbar-toggler-icon
+        .collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item
+              a.nav-link(href=urlFor('users')) Users
+
+            if isSignedIn()
+              li.nav-item
+                a.nav-link(href=urlFor('user', userId)) Settings
+
           if isSignedIn()
-            li.nav-item
-              a.nav-link(href=urlFor('session') data-method='delete' rel='nofollow') Sign Out
+            .row.align-items-center
+              .nav-item.col
+                form(method="POST" action=urlFor('session', {query: '_method=DELETE'}))
+                  button.btn.btn-outline-secondary.btn-sm(type='submit') Sign Out
+              .nav-item.col: img.rounded-circle(src=userAvatar + '?s=40')
+
           else
-            li.nav-item
-              a.nav-link(href=urlFor('newSession')) Sign In
-            li.nav-item
-              a.nav-link(href=urlFor('newUser')) Sign Up
-    main.container
-      - const msg = flash.get()
+            ul.navbar-nav
+              li.nav-item
+                a.nav-link(href=urlFor('newSession')) Sign In
+              li.nav-item
+                a.nav-link(href=urlFor('newUser')) Sign Up
+
+    main.container.container-fluid.mt-5
+      -console.log('flash.get()', flash.get())
+      - const { msg, level = 'info' } = flash.get() || error || {}
       if msg
-        .alert.alert-info.m-3= msg
+        .alert.mt-3(class='alert-' + level)= msg
       block content
 
     footer.footer

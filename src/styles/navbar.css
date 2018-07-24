@@ -1,0 +1,30 @@
+.navbar {
+    box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+    position: fixed;
+    background-color: #f5f5f5;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+    grid-area: nav;
+}
+
+.navbar-wrapper {
+    height: 56px;
+}
+
+.navbar::after {
+    background: linear-gradient(to right, #9E7CC1, #8ECDEA);
+    content: '';
+    width: 100%;
+    position: absolute;
+    bottom: -1px;
+    height: 3px;
+    left: 0;
+}
+
+.nav-item.nav-link {
+    padding-right: .5rem;
+    padding-left: .5rem;
+    color: #cbbde2;
+}

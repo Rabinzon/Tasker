@@ -2,8 +2,10 @@ extends /layouts/application.pug
 
 block content
   +formFor(f, { url: urlFor('users'), method: 'post' })
-    +input(f, 'email')
-    +input(f, 'firstName')
-    +input(f, 'lastName')
-    +input(f, 'password', { as: 'password' })
-    +button(f)
+    h1.h3.mb-3.font-weight-normal Please sign up
+    +input(f, 'email', { as: 'email', required: true })
+    +input(f, 'firstName', { required: true })
+    +input(f, 'lastName', { required: true })
+    +input(f, 'password', { as: 'password', required: true })
+    +button(f, 'submit', 'btn-lg btn-primary btn-block')
+      | Sign up

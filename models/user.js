@@ -8,7 +8,9 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       validate: {
-        isEmail: true,
+        isEmail: {
+          msg: 'Email isn\'t valid',
+        },
       },
     },
     passwordDigest: {
@@ -17,15 +19,24 @@ export default (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+    avatar: {
+      type: DataTypes.STRING,
+    },
     password: {
       type: DataTypes.VIRTUAL,
-      set: (value) => {
+      set(value) {
         this.setDataValue('passwordDigest', encrypt(value));
         this.setDataValue('password', value);
         return value;
       },
       validate: {
         len: [1, +Infinity],
+      },
+    },
+    fullName: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return `${this.firstName} ${this.lastName}`;
       },
     },
   }, {

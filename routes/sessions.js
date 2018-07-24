@@ -17,12 +17,18 @@ export default (router) => {
       });
       if (user && user.passwordDigest === encrypt(password)) {
         ctx.session.userId = user.id;
+        ctx.session.userAvatar = user.avatar;
         ctx.redirect(router.url('root'));
         return;
       }
 
-      ctx.flash.set('email or password were wrong');
-      ctx.render('sessions/new', { f: buildFormObj({ email }) });
+      ctx.render('sessions/new', {
+        f: buildFormObj({ email }),
+        error: {
+          msg: 'email or password were wrong',
+          level: 'danger',
+        },
+      });
     })
     .delete('session', '/session', (ctx) => {
       ctx.session = {};

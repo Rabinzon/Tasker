@@ -1,0 +1,16 @@
+extends /layouts/application.pug
+
+block content
+    .text-center.mb-4
+        img.rounded-circle.mb-3(src=avatar + '?s=120' alt='gravatar')
+
+        form(method="POST" action=urlFor('user', userId, {query: '_method=DELETE'}))
+            button.btn.btn-danger(type='submit') Delete profile
+
+    +formFor(f, { url: urlFor('user', userId), method: 'post' })
+        +input(f, 'email', { as: 'email', required: true })
+        +input(f, 'firstName', { required: true })
+        +input(f, 'lastName', { required: true })
+        +input(f, 'password', { as: 'password', required: true })
+        +button(f, type='submit', 'btn-success')
+            | Update

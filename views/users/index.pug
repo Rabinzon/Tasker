@@ -4,12 +4,14 @@ block content
   table.table.table-stripped
     thead
       tr
+        th
         th Full Name
         th Email
         th Created At
     tbody
       each user in users
         tr
+          td: img.rounded-circle(src=user.avatar + '?s=50')
           td= user.fullName
           td= user.email
           td= user.createdAt

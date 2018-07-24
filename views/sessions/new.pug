@@ -2,6 +2,8 @@ extends /layouts/application.pug
 
 block content
   +formFor(f, { url: urlFor('session'), method: 'post' })
-    +input(f, 'email')
-    +input(f, 'password', { as: 'password' })
-    +button(f)
+    h1.h3.mb-3.font-weight-normal Please sign in
+    +input(f, 'email', { as: 'email', required: true })
+    +input(f, 'password', { as: 'password', required: true })
+    +button(f, 'submit', 'btn-lg btn-primary btn-block')
+      | Sign in
