@@ -7,9 +7,9 @@ html(lang="en")
     script(src='/assets/main.js')
   body
     .navbar-wrapper
-      nav.navbar.navbar-expand-lg.navbar-light.bg-faded
+      nav.navbar.navbar-expand-lg.navbar-light.bg-faded.fixed-top
         a.navbar-brand(href="/")
-          i.fas.fa-cookie.mr-md-2
+          i.fas.fa-cookie.mb-1.mr-2
           | Task Manager
         button.navbar-toggler(data-toggle="collapse" data-target="#navbarSupportedContent")
           span.navbar-toggler-icon
@@ -37,7 +37,6 @@ html(lang="en")
                 a.nav-link(href=urlFor('newUser')) Sign Up
 
     main.container.container-fluid.mt-5
-      -console.log('flash.get()', flash.get())
       - const { msg, level = 'info' } = flash.get() || error || {}
       if msg
         .alert.mt-3(class='alert-' + level)= msg
@@ -46,5 +45,4 @@ html(lang="en")
     footer.footer
       .container
         span.text-muted Task Manager by &nbsp;
-        a(href='/') @rabinzon
-
+        a(href='https://github.com/rabinzon/') @rabinzon

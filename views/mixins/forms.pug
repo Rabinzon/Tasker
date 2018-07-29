@@ -15,11 +15,11 @@ mixin input(f, property, options = { as: 'text', required: false })
   .form-group(class=(f.errors[property] && 'has-danger'))
     label= labelNames[property]
     input(name=getInputName(f, property) required=options.required placeholder=labelNames[property] class='form-control' type=options['as'] value=`${value}`)
+
     if f.errors[property]
-      .form-control-feedback= f.errors[property].map(({ message }) => message).join('. ')
+      .invalid-feedback.d-block=f.errors[property].map(({ message }) => message).join('. ')
 
 mixin button(f, type = 'submit', className = 'btn-default')
   .form-group
     button(class='btn ' + className type=`${type}` value=`Save`)
       block
-

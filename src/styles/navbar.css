@@ -1,12 +1,7 @@
 .navbar {
-    box-shadow: 0 4px 4px rgba(0,0,0,0.1);
-    position: fixed;
-    background-color: #f5f5f5;
     z-index: 1;
-    left: 0;
-    right: 0;
-    top: 0;
-    grid-area: nav;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+    background-color: #f5f5f5;
 }
 
 .navbar-wrapper {
@@ -21,10 +16,4 @@
     bottom: -1px;
     height: 3px;
     left: 0;
-}
-
-.nav-item.nav-link {
-    padding-right: .5rem;
-    padding-left: .5rem;
-    color: #cbbde2;
 }
