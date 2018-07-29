@@ -1,6 +1,6 @@
 import gravatar from 'gravatar';
-import buildFormObj from '../lib/formObjectBuilder';
 import { User } from '../models';
+import buildFormObj from '../lib/formObjectBuilder';
 
 export default (router) => {
   router

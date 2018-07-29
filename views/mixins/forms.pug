@@ -2,10 +2,9 @@
 - const labelNames = {password: 'Password', firstName: 'First name', lastName: 'Last name', email: 'Email'}
 mixin formFor(f, options = {})
   - const url = _.get(options, 'url');
-  - const className = _.get(options, 'className', '');
   - const method = _.get(options, 'method', 'get').toLowerCase();
   - const isStandart = _.includes(['get', 'post'], method);
-  form.form(action= url method= isStandart ? method : 'post')
+  form.form(action= url method= isStandart ? method : 'post')&attributes(attributes)
     if !isStandart
       input(name='_method' type='hidden' value= method)
     block
@@ -14,12 +13,12 @@ mixin input(f, property, options = { as: 'text', required: false })
   - const value = f.object[property] === undefined ? '' : f.object[property]
   .form-group(class=(f.errors[property] && 'has-danger'))
     label= labelNames[property]
-    input(name=getInputName(f, property) required=options.required placeholder=labelNames[property] class='form-control' type=options['as'] value=`${value}`)
+    input(name=getInputName(f, property) required=options.required placeholder=labelNames[property] class='form-control' type=options['as'] value=`${value}`)&attributes(attributes)
 
     if f.errors[property]
       .invalid-feedback.d-block=f.errors[property].map(({ message }) => message).join('. ')
 
 mixin button(f, type = 'submit', className = 'btn-default')
   .form-group
-    button(class='btn ' + className type=`${type}` value=`Save`)
+    button(class='btn ' + className type=`${type}` value=`Save`)&attributes(attributes)
       block

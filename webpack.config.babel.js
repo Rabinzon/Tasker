@@ -1,5 +1,5 @@
 import path from 'path';
-// import webpack from 'webpack';
+import webpack from 'webpack';
 
 const mode = (process.env.NODE_ENV === 'test' && 'development') || process.env.NODE_ENV || 'development';
 
@@ -14,7 +14,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /(\.js)(\.css)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
@@ -29,11 +29,11 @@ module.exports = {
     ],
   },
   plugins: [
-    // new webpack.ProvidePlugin({
-    //   $: 'jquery',
-    //   jQuery: 'jquery',
-    //   'window.jQuery': 'jquery',
-    //   Popper: ['popper.js', 'default'],
-    // }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      // Popper: ['popper.js', 'default'],
+    }),
   ],
 };
