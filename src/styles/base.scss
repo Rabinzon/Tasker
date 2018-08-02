@@ -1,0 +1,6 @@
+@import "variables";
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+main {
+    min-height: calc(100vh - 150px);
+}

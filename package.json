@@ -106,9 +106,11 @@
     "jest-cli": "^23.1.0",
     "jest-supertest-matchers": "0.0.1",
     "json-loader": "^0.5.7",
+    "node-sass": "^4.9.2",
     "nodemon": "^1.17.5",
     "postcss-loader": "^2.1.6",
     "regenerator-runtime": "^0.12.0",
+    "sass-loader": "^7.1.0",
     "supertest": "^3.1.0"
   }
 }
