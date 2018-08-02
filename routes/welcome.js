@@ -1,7 +1,12 @@
+import { TaskStatus } from '../models';
+import buildFormObj from '../lib/formObjectBuilder';
+
 export default (router) => {
   router.get('root', '/', (ctx) => {
     if (ctx.state.isSignedIn()) {
-      ctx.redirect('board');
+      const taskStatus = TaskStatus.build();
+      ctx.render('board/index', { f: buildFormObj(taskStatus) });
+
       return;
     }
 

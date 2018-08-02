@@ -1,0 +1,19 @@
+mixin card(props)
+  .card.my-1
+    .card-body
+      h5.card-title=props.title
+      .mb-2
+        .badge.badge-primary tag
+        .dropdown.d-inline
+          button.badge.badge-dark(type="button" data-toggle="dropdown") +
+          .dropdown-menu.dropdown-menu-righ
+            +formFor(f, {url: urlFor('users'), method: 'post'}).px-2
+              +input(f, 'name', {required: true, placeholder: 'tag name'}).form-control-sm
+              .mb-3
+                .badge.badge-success tag
+                .badge.badge-success tag
+                .badge.badge-primary tag
+              +button(f, 'submit', 'btn-lg btn-primary btn-block').btn-sm
+                | Create
+
+      p.card-text=props.text

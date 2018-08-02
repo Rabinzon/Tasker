@@ -15,6 +15,7 @@
   "scripts": {
     "gulp": "gulp",
     "sequelize": "sequelize",
+    "create-migration": "node ./node_modules/sequelize-auto-migrations/bin/makemigration",
     "nodemon": "nodemon",
     "pretest": "NODE_ENV=test sequelize db:migrate",
     "test": "NODE_ENV=test jest",
@@ -80,6 +81,7 @@
     "popper.js": "^1.14.3",
     "rollbar": "^2.4.2",
     "sequelize": "^4.38.0",
+    "sequelize-auto-migrations": "^1.0.2",
     "sequelize-cli": "^4.0.0",
     "sequelize-test-setup": "0.0.4",
     "sqlite3": "^4.0.2",

@@ -1,11 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
-  const TaskStatus = sequelize.define('TaskStatus', {
+  const Tag = sequelize.define('Tag', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
-
   }, {});
-
-  return TaskStatus;
+  return Tag;
 };
