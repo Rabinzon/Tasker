@@ -50,6 +50,16 @@ export default () => {
 
   app.use(koaLogger());
   const router = new Router();
+  router.use('/profile/edit', async (ctx, next) => {
+    console.log(ctx.state.isSignedIn());
+    if (!ctx.state.isSignedIn()) {
+      ctx.flash.set({ msg: 'Not allowed! Please sign in.', level: 'danger' });
+      ctx.redirect(router.url('root'));
+      return;
+    }
+    await next();
+  });
+
   addRoutes(router, container);
   app.use(router.allowedMethods());
   app.use(router.routes());

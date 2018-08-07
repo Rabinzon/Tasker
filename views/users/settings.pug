@@ -4,10 +4,14 @@ block content
     .text-center.mb-4
         img.rounded-circle.mb-3(src=avatar + '?s=120' alt='gravatar')
 
-        form(method="POST" action=urlFor('user', userId, {query: '_method=DELETE'}))
+        form(
+          method="POST"
+          action=urlFor('profile', {query: '_method=DELETE'})
+          data-confirm="Are you sure you want delete profile?"
+        )
             button.btn.btn-danger(type='submit') Delete profile
 
-    +formFor(f, { url: urlFor('user', userId), method: 'post' })
+    +formFor(f, { url: urlFor('profile'), method: 'post' })(data-confirm="Are you sure you want update profile?")
         +input(f, 'email', { as: 'email', required: true })
         +input(f, 'firstName', { required: true })
         +input(f, 'lastName', { required: true })

@@ -6,7 +6,6 @@ export default (router) => {
     if (ctx.state.isSignedIn()) {
       const taskStatus = TaskStatus.build();
       ctx.render('board/index', { f: buildFormObj(taskStatus) });
-
       return;
     }
 
