@@ -1,60 +1,17 @@
 extends /layouts/application.pug
 
-mixin card(props)
-    .card.my-1
-      .card-body
-        h5.card-title=props.title
-        p.card-text=props.text
+block board
+  .d-flex.board.mb-5.pl-2
+    each column, index in columns || []
+      +column({
+        id: column.id,
+        name: column.name,
+        cards: cards
+      }, index)
 
-mixin column(props)
-  .col-sm.p-1
-    .border.p-2
-      h4=props.title
-      each card in props.cards || []
-        +card(card)
-
-block content
-  .row
-    +column({
-      title: 'To do',
-      cards: [
-        {
-          title: 'Card title',
-          text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-        }, {
-          title: 'Card title',
-          text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-        }
-      ]
-    })
-    +column({
-      title: 'In progress',
-      cards: [
-        {
-          title: 'Card title',
-          text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-        }, {
-          title: 'Card title',
-          text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-        }
-      ]
-    })
-    +column({
-      title: 'Done',
-      cards: [
-        {
-          title: 'Card title',
-          text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-        }, {
-          title: 'Card title',
-          text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-        }
-      ]
-    })
-
-    .col-sm.p-1
+    .p-1: .column
       .border.p-2
-        +formFor(f, {url: '/', method: 'post'})
-          +input(f, 'Column name', {required: true})
+        +formFor(f, {url: 'column', method: 'post'})
+          +input(f, 'name', {required: true})
           +button(f, type='submit', 'btn-success')
             | Create column

@@ -1,0 +1,56 @@
+mixin cardModal(props)
+  .modal.fade(id='cardModal' + props.id)
+      .modal-dialog(role='document')
+        .modal-content
+          .modal-header
+            .d-flex.justify-content-between.align-items-center.w-100.mb-2
+              .d-flex.align-items-center
+                .dropdown.d-inline
+                  button.btn-sm(type="button" data-toggle="dropdown") Move to
+                  .dropdown-menu.dropdown-menu-righ
+                    +formFor(f, {url: urlFor('editTask', props.id, {query: '_method=patch'}), method: 'post'}).px-2
+                      select(name='form[statusId]').custom-select.mb-2
+                        each column in columns || []
+                          option(value=column.id)=column.name
+
+                      +button(f, 'submit').btn-primary.btn-block.btn-sm
+                        | Move
+              div
+                if !props.assignedTo
+                  .dropdown.d-inline
+                    button.btn-sm(type="button" data-toggle="dropdown") Assign to
+                    +asignToMenu(props)
+                if props.assignedTo
+                  .dropdown.d-inline
+                    a(data-toggle="dropdown")
+                      img.rounded-circle.border.ml-2(
+                      src=props.assignedTo.avatar + '?s=30&d=identicon'
+                      data-toggle="tooltip"
+                      title="assigned to: " + props.assignedTo.fullName
+                      )
+                    +asignToMenu(props)
+                img.rounded-circle.border.border-primary.ml-2(src=props.creator.avatar + '?s=30' data-toggle="tooltip" title="creator: " + props.creator.fullName)
+
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') ×
+          .modal-body
+            h6.card-title.mb-0=props.name
+            .mb-2
+              each tag in props.Tags || []
+                +removeTagBtn(tag, props.id)
+              .dropdown.d-inline
+                button.badge.badge-dark(type="button" data-toggle="dropdown") +
+                .dropdown-menu.dropdown-menu-righ.p-1
+                  .mb-3
+                    each tag in tags || []
+                      +addTagBtn(tag, props.id)
+
+                  +formFor(f, {url: urlFor('tag'), method: 'post'}).form-inline
+                    +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
+                    +button(f, type='submit').btn-success.btn-sm.mb-2 Add tag
+            p.card-text=props.text
+            p.card-text=props.description || 'Click \'Edit\' to add card description'
+
+          .modal-footer
+            a.btn.btn-link.text-secondary(href=urlFor('editTask', props.id)) Edit
+            button.btn.btn-danger Delete

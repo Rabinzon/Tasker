@@ -6,5 +6,9 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
     },
   }, {});
+
+  Tag.associate = function (models) {
+    models.Tag.belongsToMany(models.Task, { through: 'TaskTags  ' });
+  };
   return Tag;
 };

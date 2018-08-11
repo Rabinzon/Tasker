@@ -4,3 +4,11 @@
 main {
     min-height: calc(100vh - 150px);
 }
+
+.column {
+    width: 300px;
+}
+
+.board {
+    overflow-x: scroll;
+}

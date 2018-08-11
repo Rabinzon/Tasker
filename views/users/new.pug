@@ -1,11 +1,12 @@
 extends /layouts/application.pug
 
 block content
-  +formFor(f, { url: urlFor('users'), method: 'post' })
-    h1.h3.mb-3.font-weight-normal Please sign up
-    +input(f, 'email', { as: 'email', required: true })
-    +input(f, 'firstName', { required: true })
-    +input(f, 'lastName', { required: true })
-    +input(f, 'password', { as: 'password', required: true })
-    +button(f, 'submit', 'btn-lg btn-primary btn-block')
-      | Sign up
+  .row.justify-content-md-center: .col-6
+      +formFor(f, { url: urlFor('users'), method: 'post' })
+        h1.h3.mb-3.font-weight-normal Please sign up
+        +input(f, 'email', { as: 'email', required: true })
+        +input(f, 'firstName', { required: true })
+        +input(f, 'lastName', { required: true })
+        +input(f, 'password', { as: 'password', required: true })
+        +button(f, 'submit', 'btn-lg btn-primary btn-block')
+          | Sign up

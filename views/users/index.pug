@@ -11,7 +11,7 @@ block content
     tbody
       each user in users
         tr
-          td: img.rounded-circle(src=user.avatar + '?s=50')
+          td: img.rounded-circle(src=user.avatar + '?s=50&d=identicon')
           td= user.fullName
           td= user.email
           td= user.createdAt

@@ -1,19 +1,74 @@
+include /mixins/cardModal
+
+mixin asignToMenu(props)
+    .dropdown-menu.dropdown-menu-righ
+      +formFor(f, {url: urlFor('editTask', props.id, {query: '_method=patch'}), method: 'post'}).px-2
+        select(name='form[assignedToId]').custom-select.mb-2
+          option(value='default') default
+          each user in users || []
+            option(value=user.id selected=user.id === props.assignedToId)=user.fullName
+        +button(f, 'submit').btn-primary.btn-block.btn-sm
+          | Assign
+
+mixin addTagBtn(props, taskId)
+  .d-flex
+    +formFor(f, {url: urlFor('addTagToTask', taskId), method: 'post'})
+      input(type='hidden' name='form[tagId]' value=props.id)
+      button.badge.badge-info(type='submit')=props.name
+    +formFor(f, {url: urlFor('deleteTag', props.id, {query: '_method=delete'}), method: 'post'})
+      button.badge.badge-dark(type="submit") x
+
+
+mixin removeTagBtn(props, taskId)
+  +formFor(f, {url: urlFor('removeTagToTask', taskId, {query: '_method=delete'}), method: 'post'}).d-inline-flex
+    input(type='hidden' name='form[tagId]' value=props.id)
+    button.badge.badge-info(type='submit')=props.name + ' x'
+
 mixin card(props)
-  .card.my-1
+  .card.my-1(data-toggle="modal" data-target='#cardModal' + props.id)
     .card-body
-      h5.card-title=props.title
+      .d-flex.justify-content-between.align-items-center.mb-2
+        .dropdown.d-inline
+          button.btn-sm(type="button" data-toggle="dropdown") Move to
+          .dropdown-menu.dropdown-menu-righ
+            +formFor(f, {url: urlFor('editTask', props.id, {query: '_method=patch'}), method: 'post'}).px-2
+              select(name='form[statusId]').custom-select.mb-2
+                each column in columns || []
+                  option(value=column.id)=column.name
+              +button(f, 'submit').btn-primary.btn-block.btn-sm
+                | Move
+        .d-flex.align-items-center
+            if !props.assignedTo
+              .dropdown.d-inline
+                button.btn-sm(type="button" data-toggle="dropdown") Assign to
+                +asignToMenu(props)
+            if props.assignedTo
+              .dropdown.d-inline
+                a(data-toggle="dropdown")
+                  img.rounded-circle.border.ml-2(
+                    src=props.assignedTo.avatar + '?s=30&d=identicon'
+                    data-toggle="tooltip"
+                    title="assigned to: " + props.assignedTo.fullName
+                  )
+                +asignToMenu(props)
+            img.rounded-circle.border.border-primary.ml-2(src=props.creator.avatar + '?s=30' data-toggle="tooltip" title="creator: " + props.creator.fullName)
+
+      h6.card-title.mb-0=props.name
       .mb-2
-        .badge.badge-primary tag
+        each tag in props.Tags || []
+          button.badge.badge-info=tag.name
         .dropdown.d-inline
           button.badge.badge-dark(type="button" data-toggle="dropdown") +
-          .dropdown-menu.dropdown-menu-righ
-            +formFor(f, {url: urlFor('users'), method: 'post'}).px-2
-              +input(f, 'name', {required: true, placeholder: 'tag name'}).form-control-sm
-              .mb-3
-                .badge.badge-success tag
-                .badge.badge-success tag
-                .badge.badge-primary tag
-              +button(f, 'submit', 'btn-lg btn-primary btn-block').btn-sm
-                | Create
+          .dropdown-menu.dropdown-menu-righ.p-1
+            .mb-3
+              each tag in tags || []
+                +addTagBtn(tag, props.id)
+
+            .mt-2
+              +formFor(f, {url: urlFor('tag'), method: 'post'}).form-inline
+                +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
+                +button(f, type='submit').btn-success.btn-sm.mb-2 + Add new tag
 
       p.card-text=props.text
+
+    +cardModal(props)

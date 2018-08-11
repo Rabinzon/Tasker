@@ -1,0 +1,28 @@
+extends /layouts/application.pug
+
+block content
+  .container
+    .row.justify-content-md-center
+      .col-6
+        +formFor(f, {url: urlFor('editTask', taskId, {query: '_method=patch'}), method: 'post'})
+          h1.h3.mb-3.font-weight-normal Edit Task
+          +input(f, 'name', {required: true, label: 'Task title'})
+          .form-row
+            .col
+              .form-group
+                label(for='statusIdSelect') Column
+                select(id='statusIdSelect' name='form[statusId]' value=f.object.statusId).custom-select.mb-2
+                  each column in columns || []
+                    option(value=column.id selected=f.object.statusId === column.id)=column.name
+            .col
+              .form-group
+                label(for='assignedToIdSelect') Assigned to
+                select(id='assignedToIdSelect' name='form[assignedToId]' value=f.object.assignedToId).custom-select.mb-2
+                  each user in users || []
+                    option(value=user.id selected=f.object.assignedToId === user.id)=user.fullName
+
+          +textarea(f, 'description', {label: 'Description'})
+          .d-flex.align-items-center.justify-content-end
+            a.btn.btn-link.text-secondary(href=urlFor('board')) Cancel
+            button(type='submit').btn-success.btn-sm Save
+

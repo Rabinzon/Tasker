@@ -1,9 +1,10 @@
 extends /layouts/application.pug
 
 block content
-  +formFor(f, { url: urlFor('session'), method: 'post' })
-    h1.h3.mb-3.font-weight-normal Please sign in
-    +input(f, 'email', { as: 'email', required: true })
-    +input(f, 'password', { as: 'password', required: true })
-    +button(f, 'submit', 'btn-lg btn-primary btn-block')
-      | Sign in
+  .row.justify-content-md-center: .col-6
+    +formFor(f, { url: urlFor('session'), method: 'post' })
+      h1.h3.mb-3.font-weight-normal Please sign in
+      +input(f, 'email', { as: 'email', required: true })
+      +input(f, 'password', { as: 'password', required: true })
+      +button(f, 'submit', 'btn-lg btn-primary btn-block')
+        | Sign in

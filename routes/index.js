@@ -5,7 +5,7 @@ import board from './board';
 import columns from './columns';
 import profile from './profile';
 import tags from './tags';
-import cards from './cards';
+import cards from './tasks';
 
 const controllers = [
   welcome, users, sessions, board, columns,

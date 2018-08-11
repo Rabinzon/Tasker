@@ -1,8 +1,8 @@
 include /mixins/card.pug
 
 mixin column(props)
-  .col-sm.p-1
-    .border.p-2
+  .p-1
+    .border.p-2.column.p-1
       .row.js-title.justify-content-between
         .col-9
           h4=props.name
@@ -14,15 +14,25 @@ mixin column(props)
 
         .col-3.text-dark
           .d-flex.align-items-center.justify-content-end
-            button.btn.btn-sm.btn-link.js-title-edit-btn edit
-            form(method="post" action=urlFor('deleteColumn', props.id, {query: '_method=DELETE'}))
+            .dropdown.d-inline
+              button.btn.btn-sm.btn-link(data-toggle="dropdown") edit
+              .dropdown-menu.dropdown-menu-righ
+                +formFor(f, {url: urlFor('editColumn', props.id, {query: '_method=PATCH'}), method: 'post'}).px-2
+                  +input(f, 'name', {required: true, placeholder: 'column name'})(value=props.name).form-control-sm
+                  +button(f, 'submit', 'btn-lg btn-primary btn-block').btn-sm
+                    | save
+            form(method="post" action=urlFor('deleteColumn', props.id, {query: '_method=DELETE'}))(data-confirm="Are you sure you want delete column?")
               button.close.mb-1
                 span(aria-hidden='true') ×
-      each card in props.cards || []
+      - const columnCards = _.filter(props.cards, { statusId: props.id })
+      each card in columnCards
         +card(card)
 
-      +formFor(f, {url: urlFor('cards'), method: 'post'}).form-inline
-        +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
-        +button(f, type='submit', 'btn-primary').btn-sm.mb-2
-          | Create card
-
+      .mt-2
+        .collapse(id='collapse' + props.id)
+          +formFor(f, {url: urlFor('tasks'), method: 'post'}).form-inline
+            +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
+            input(type='hidden' name='form[statusId]' value=props.id)
+            +button(f, type='submit').btn-success.btn-sm.mb-2 Add task
+        a.btn.btn-link.text-muted(data-toggle='collapse', href='#collapse' + props.id, role='button', aria-expanded='false', aria-controls='collapse' + props.id)
+          | + Add new task

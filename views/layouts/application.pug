@@ -1,4 +1,5 @@
 include /mixins/forms.pug
+include /mixins/column.pug
 
 doctype html
 html(lang="en")
@@ -35,11 +36,13 @@ html(lang="en")
               li.nav-item
                 a.nav-link(href=urlFor('newUser')) Sign Up
 
-    main.container.container-fluid.mt-5
-      - const { msg, level = 'info' } = flash.get() || error || {}
-      if msg
-        .alert.mt-3(class='alert-' + level)= msg
-      block content
+    main.container-fluid.mt-5.p-0
+      .container
+        - const { msg, level = 'info' } = flash.get() || error || {}
+        if msg
+          .alert.mt-3(class='alert-' + level)= msg
+        block content
+      block board
 
 
     footer.footer
