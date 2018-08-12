@@ -39,15 +39,10 @@ export default (sequelize, DataTypes) => {
         return `${this.firstName} ${this.lastName}`;
       },
     },
-  }, {
-    classMethods: {
-      fullName() {
-        return `${this.firstName} ${this.lastName}`;
-      },
-      associate() {
-        // associations can be defined here
-      },
-    },
   });
+  User.associate = function () {
+    // associations can be defined here
+    // this.hasOne(models.Card, { foreignKey: 'creator' });
+  };
   return User;
 };

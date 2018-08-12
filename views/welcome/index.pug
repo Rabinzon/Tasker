@@ -1,8 +1,15 @@
 extends /layouts/application.pug
 
 block content
-  h1 Hello world
-    p.lead
-      | Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.
-    p.lead
-      a.btn.btn-lg.btn-secondary(href='#') Learn more
+  .row.justify-content-md-center
+    .col-6.pt-5
+      h1 Hello there!
+      p.lead
+        | This is another one simple task manager application! Not SPA, it works on server side only. I used bootstrap, node.js, koa.js, sequelize.js and postgres as a db.
+        | Deployed on heroku.
+        br
+        | All source code you can see on&nbsp;
+        a(href='https://github.com/Rabinzon/tasker') github
+      p.lead
+          a.btn.btn-lg.btn-outline-primery.mr-2(href=urlFor('newUser')) Sign up
+          a.btn.btn-lg.btn-outline-info(href=urlFor('board')) See the demo!

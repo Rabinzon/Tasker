@@ -67,11 +67,11 @@ export default () => {
   app.use(async (ctx, next) => {
     try {
       await next();
-
       if (ctx.response.status === 404 && !ctx.response.body) {
         ctx.throw(404);
       }
     } catch (err) {
+      console.log(ctx.url);
       console.log(err);
 
       ctx.status = err.status || 500;

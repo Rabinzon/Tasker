@@ -16,7 +16,6 @@ export default (router) => {
     })
     .delete('deleteColumn', '/column/:id', async (ctx) => {
       const taskStatus = await TaskStatus.findById(ctx.params.id);
-      console.log(taskStatus);
       await taskStatus.destroy();
       ctx.flash.set({ msg: `Column ${taskStatus.name} has been deleted` });
       ctx.redirect(router.url('board'));

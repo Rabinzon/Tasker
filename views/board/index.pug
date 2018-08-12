@@ -1,53 +1,20 @@
 extends /layouts/application.pug
+include /board/filter
 
-mixin card(props)
-    .card.my-1
-      .card-body
-        h5.card-title=props.title
-        p.card-text=props.text
-
-mixin column(props)
-  .col-sm.p-1
-    .border.p-2
-      .row.js-title.justify-content-between
-        .col-9
-          h4=props.name
-          form.js-title-edit-form.form-inline.d-none(method='post' action=urlFor('editColumn', props.id, {query: '_method=PATCH'}))
-            .form-group.mr-2.mb-2
-              label(for='name')
-              input.form-control.form-control-sm(name='form[name]' required value=props.name)
-            button.btn.btn-sm.btn-success.mb-2 save
-
-        .col-3.text-dark
-          .d-flex.align-items-center.justify-content-end
-            button.btn.btn-sm.btn-link.js-title-edit-btn edit
-            form(method="post" action=urlFor('deleteColumn', props.id, {query: '_method=DELETE'}))
-              button.close.mb-1
-                span(aria-hidden='true') ×
-      each card in props.cards || []
-        +card(card)
-
-block content
-  .row
-    each column in columns
+block board
+  +filter
+  .d-flex.board.mb-5.pl-2
+    each column, index in columns || []
       +column({
-        name: column.name,
         id: column.id,
-        cards: [
-          {
-            title: 'Card title',
-            text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-          }, {
-            title: 'Card title',
-            text: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.'
-          }
-        ]
-      })
+        name: column.name,
+        cards: cards
+      }, index)
 
-    .col-sm.p-1
-      .border.p-2
-        +formFor(f, {url: urlFor('column'), method: 'post'}).form-inline
-          +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
-          +button(f, type='submit', 'btn-success').btn-sm.mb-2
-            | Create
-
+    if isSignedIn()
+      .p-1: .column
+        .border.p-2
+          +formFor(f, {url: 'column', method: 'post'})
+            +input(f, 'name', {required: true})
+            +button(f, type='submit', 'btn-success')
+              | Create column
