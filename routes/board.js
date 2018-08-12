@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Task, TaskStatus, User, Tag } from '../models';
+import { Task, TaskStatus, User, TaskTags, Tag } from '../models';
 import buildFormObj from '../lib/formObjectBuilder';
 
 const allowedSearchQueryAttributes = ['assignedToId', 'statusId'];
@@ -16,7 +16,7 @@ export default (router) => {
 
       if (_.has(query, 'tagId')) {
         tagQuery = {
-          id: query.tagId,
+          tagId: query.tagId,
         };
       }
 
@@ -34,9 +34,6 @@ export default (router) => {
         }, {
           model: TaskStatus,
           as: 'status',
-        }, {
-          model: Tag,
-          where: tagQuery,
         }],
         where: query,
       });

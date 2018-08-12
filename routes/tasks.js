@@ -10,12 +10,8 @@ export default (router) => {
       if (!form.statusId) {
         form.statusId = 1;
       }
-      const tag = await Tag.findById(1);
       const card = await Task.build(form);
       await card.save();
-
-      const taskTags = await TaskTags.build({ tagId: tag.id, taskId: card.id });
-      await taskTags.save();
 
       ctx.redirect(router.url('board'));
     })
