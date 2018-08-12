@@ -23,6 +23,7 @@ html(lang="en")
                 a.nav-link(href=urlFor('profile')) Settings
 
           if isSignedIn()
+
             .row.align-items-center
               .nav-item.col
                 form(method="POST" action=urlFor('session', {query: '_method=DELETE'}))

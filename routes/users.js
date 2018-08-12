@@ -25,5 +25,5 @@ export default (router) => {
       } catch (e) {
         ctx.render('users/new', { f: buildFormObj(user, e) });
       }
-    })
+    });
 };

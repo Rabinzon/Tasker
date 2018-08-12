@@ -1,7 +1,5 @@
 import request from 'supertest';
 import matchers from 'jest-supertest-matchers';
-import path from 'path';
-import { spawn } from 'child-process-promise';
 import userFixture from '../__fixtures__/user.json';
 
 import app from '..';
@@ -14,7 +12,7 @@ const runMigrations = async () => {
     const migrate = exec(
       'sequelize db:migrate',
       { env: process.env },
-      (err, stdout, stderr) => {
+      (err) => {
         if (err) {
           reject(err);
         } else {
@@ -82,13 +80,6 @@ describe('requests', () => {
       .post('/session')
       .send({ form: userFixture });
 
-    expect(res).toHaveHTTPStatus(302);
-  });
-
-  it('CREATE session', async () => {
-    const res = await request.agent(server)
-      .post('/session')
-      .send({ form: userFixture });
     expect(res).toHaveHTTPStatus(302);
   });
 

@@ -1,5 +1,4 @@
 import { encrypt } from '../lib/secure';
-import { Card } from './index';
 
 export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -41,9 +40,9 @@ export default (sequelize, DataTypes) => {
       },
     },
   });
-  User.associate = function (models) {
+  User.associate = function () {
     // associations can be defined here
-   // this.hasOne(models.Card, { foreignKey: 'creator' });
-  }
+    // this.hasOne(models.Card, { foreignKey: 'creator' });
+  };
   return User;
 };

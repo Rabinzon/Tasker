@@ -1,6 +1,8 @@
 extends /layouts/application.pug
+include /board/filter
 
 block board
+  +filter
   .d-flex.board.mb-5.pl-2
     each column, index in columns || []
       +column({
@@ -9,9 +11,10 @@ block board
         cards: cards
       }, index)
 
-    .p-1: .column
-      .border.p-2
-        +formFor(f, {url: 'column', method: 'post'})
-          +input(f, 'name', {required: true})
-          +button(f, type='submit', 'btn-success')
-            | Create column
+    if isSignedIn()
+      .p-1: .column
+        .border.p-2
+          +formFor(f, {url: 'column', method: 'post'})
+            +input(f, 'name', {required: true})
+            +button(f, type='submit', 'btn-success')
+              | Create column

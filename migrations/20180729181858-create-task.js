@@ -12,14 +12,6 @@ module.exports = {
     description: {
       type: Sequelize.STRING,
     },
-    createdAt: {
-      allowNull: false,
-      type: Sequelize.DATE,
-    },
-    updatedAt: {
-      allowNull: false,
-      type: Sequelize.DATE,
-    },
     creatorId: {
       type: Sequelize.INTEGER,
       onDelete: 'CASCADE',
@@ -46,6 +38,14 @@ module.exports = {
         key: 'id',
       },
     },
+    createdAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updatedAt: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Cards'),
+  down: queryInterface => queryInterface.dropTable('Cards'),
 };

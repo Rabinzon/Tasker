@@ -5,7 +5,7 @@ export default (router) => {
   router
     .post('tasks', '/tasks', async (ctx) => {
       const { form } = ctx.request.body;
-      form.creatorId = 1; // ctx.state.userId;
+      form.creatorId = ctx.state.userId;
 
       if (!form.statusId) {
         form.statusId = 1;
@@ -14,27 +14,27 @@ export default (router) => {
       const card = await Task.build(form);
       await card.save();
 
-      const mn = await TaskTags.build({ tagId: tag.id, taskId: card.id });
-      await mn.save();
+      const taskTags = await TaskTags.build({ tagId: tag.id, taskId: card.id });
+      await taskTags.save();
 
       ctx.redirect(router.url('board'));
     })
     .patch('editTask', '/task/:id/edit', async (ctx) => {
       const { form } = ctx.request.body;
-      console.log(form);
+
       const task = await Task.findById(ctx.params.id);
       if (form.assignedToId === 'default') {
         form.assignedToId = null;
       }
       await task.update(form);
-      console.log(task);
+
       ctx.flash.set({ msg: `Task ${task.name} has been updated` });
       ctx.redirect(router.url('board'));
     })
     .delete('deleteTask', '/tasks/:id', async (ctx) => {
       const task = await Task.findById(ctx.params.id);
       await task.destroy();
-      ctx.flash.set({ msg: `Tag ${task.name} has been deleted` });
+      ctx.flash.set({ msg: `Task ${task.name} has been deleted` });
       ctx.redirect(router.url('board'));
     })
     .get('editTask', '/task/:id/edit', async (ctx) => {

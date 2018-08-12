@@ -1,0 +1,30 @@
+mixin filter()
+    .container.d-flex.justify-content-end.border.rounded.p-2.mb-5
+      .navbar-brand.mr-4(href='#') Filter:
+      form.form-row.form-inline.my-2.my-lg-0(url=urlFor('filterBoard'))
+        if isSignedIn()
+          .col.justify-content-end: .custom-control.custom-checkbox.d-inline-flex
+            input#myTasks.custom-control-input(name='my' type='checkbox' checked=query.my)
+            label.custom-control-label(for='myTasks') My tasks
+        .col: select(name='tagId').custom-select.w-100
+          if !_.has(query, 'tagId')
+            option(disabled selected value='') tag
+          each tag in tags || []
+            - const queryTagId = Number(query.tagId)
+            option(value=tag.id selected=tag.id === queryTagId)=tag.name
+        .col: select(name='statusId').custom-select.w-100
+          if !_.has(query, 'statusId')
+            option(disabled selected value) column
+          - const queryColumnId = Number(query.statusId)
+
+          each column in columns || []
+            option(value=column.id selected=column.id === queryColumnId)=column.name
+        .col: select(name='assignedToId').custom-select.w-100
+          if !_.has(query, 'assignedToId')
+            option(disabled selected value) assing to
+          - const queryAssignedToId = Number(query.assignedToId)
+          each user in users || []
+            option(value=user.id selected=user.id === queryAssignedToId)=user.fullName
+        .col.d-flex
+          button.btn.btn-outline-success.my-2.my-sm-0.mr-2(type='submit') Search
+          a.btn.btn-outline-secondary.my-2.my-sm-0(href=urlFor('board')) Reset
