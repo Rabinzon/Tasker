@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Task, TaskStatus, User, TaskTags, Tag } from '../models';
+import { Task, TaskStatus, User, Tag } from '../models';
 import buildFormObj from '../lib/formObjectBuilder';
 
 const allowedSearchQueryAttributes = ['assignedToId', 'statusId'];
@@ -36,13 +36,11 @@ export default (router) => {
           as: 'status',
         }, {
           model: Tag,
-          where: tagQuery
+          where: tagQuery,
         }],
         where: query,
       });
-  
-      console.log(tasks);
-  
+
       const taskStatus = TaskStatus.build();
       const columns = await TaskStatus.findAll();
       ctx.render('board/index', {
