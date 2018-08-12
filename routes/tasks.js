@@ -49,6 +49,7 @@ export default (router) => {
 
       const taskTag = await TaskTags.build({ tagId: tag.id, taskId: task.id });
       await taskTag.save();
+      console.log(taskTag);
 
       ctx.redirect(router.url('board'));
     })

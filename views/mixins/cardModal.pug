@@ -37,7 +37,7 @@ mixin cardModal(props)
                       title="assigned to: " + props.assignedTo.fullName
                     )
 
-                img.rounded-circle.border.border-primary.ml-2(src=props.creator.avatar + '?s=30' data-toggle="tooltip" title="creator: " + props.creator.fullName)
+                img.rounded-circle.border.border-primary.ml-2(src=props.creator.avatar + '?s=30&d=identicon' data-toggle="tooltip" title="creator: " + props.creator.fullName)
 
             button.close(type='button', data-dismiss='modal', aria-label='Close')
               span(aria-hidden='true') ×

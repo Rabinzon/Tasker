@@ -28,7 +28,7 @@ html(lang="en")
               .nav-item.col
                 form(method="POST" action=urlFor('session', {query: '_method=DELETE'}))
                   button.btn.btn-outline-secondary.btn-sm(type='submit') Sign Out
-              .nav-item.col: img.rounded-circle(src=userAvatar + '?s=40')
+              .nav-item.col: img.rounded-circle(src=userAvatar + '?s=40&d=identicon')
 
           else
             ul.navbar-nav

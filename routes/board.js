@@ -16,7 +16,7 @@ export default (router) => {
 
       if (_.has(query, 'tagId')) {
         tagQuery = {
-          tagId: query.tagId,
+          id: query.tagId,
         };
       }
 
@@ -36,11 +36,13 @@ export default (router) => {
           as: 'status',
         }, {
           model: Tag,
-          where: tagQuery,
+          where: tagQuery
         }],
         where: query,
       });
-
+  
+      console.log(tasks);
+  
       const taskStatus = TaskStatus.build();
       const columns = await TaskStatus.findAll();
       ctx.render('board/index', {

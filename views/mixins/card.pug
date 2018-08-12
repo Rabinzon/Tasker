@@ -61,7 +61,7 @@ mixin card(props)
                 data-toggle="tooltip"
                 title="assigned to: " + props.assignedTo.fullName
                 )
-            img.rounded-circle.border.border-primary(src=props.creator.avatar + '?s=30' data-toggle="tooltip" title="creator: " + props.creator.fullName)
+            img.rounded-circle.border.border-primary(src=props.creator.avatar + '?s=30&d=identicon' data-toggle="tooltip" title="creator: " + props.creator.fullName)
 
       h6.card-title.mb-0=props.name
       .mb-2
