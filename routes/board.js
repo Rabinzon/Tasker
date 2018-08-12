@@ -34,6 +34,9 @@ export default (router) => {
         }, {
           model: TaskStatus,
           as: 'status',
+        }, {
+          model: Tag,
+          where: tagQuery,
         }],
         where: query,
       });
