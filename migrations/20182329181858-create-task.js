@@ -10,7 +10,7 @@ module.exports = {
       type: Sequelize.STRING,
     },
     description: {
-      type: Sequelize.TEXT,
+      type: Sequelize.STRING(1000),
     },
     creatorId: {
       type: Sequelize.INTEGER,
