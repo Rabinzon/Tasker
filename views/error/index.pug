@@ -1,0 +1,14 @@
+extends /layouts/application.pug
+
+block content
+    .row
+        .col-md-12
+            .error-template
+                h1
+                    | Oops!
+                h2=status + ' ' + message
+                .error-details
+                    | Sorry, an error has occured!
+                .error-actions.mt-3
+                    a.btn.btn-outline-primary.btn-md(href='/')
+                        | Take Me Home

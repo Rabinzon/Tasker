@@ -51,7 +51,6 @@ export default () => {
   app.use(koaLogger());
   const router = new Router();
   router.use('/profile/edit', async (ctx, next) => {
-    console.log(ctx.state.isSignedIn());
     if (!ctx.state.isSignedIn()) {
       ctx.flash.set({ msg: 'Not allowed! Please sign in.', level: 'danger' });
       ctx.redirect(router.url('root'));
@@ -77,11 +76,15 @@ export default () => {
       ctx.status = err.status || 500;
       ctx.body = err.message;
       ctx.app.emit('error', err, ctx);
+
+      ctx.render('error/index', {
+        status: err.status,
+        message: err.message,
+      });
     }
   });
 
   app.on('error', (err) => {
-    console.log(err);
     if (process.env.NODE_ENV === 'production') {
       rollbar.log(err);
     }
