@@ -38,6 +38,33 @@ export default () => {
     };
     await next();
   });
+
+  app.use(async (ctx, next) => {
+    try {
+      await next();
+      if (ctx.response.status === 404 && !ctx.response.body) {
+        ctx.throw(404);
+      }
+    } catch (err) {
+      console.log(ctx.url, err);
+
+      ctx.status = err.status || 500;
+      ctx.body = err.message;
+      ctx.app.emit('error', err, ctx);
+
+      ctx.render('error/index', {
+        status: ctx.status,
+        message: ctx.message,
+      });
+    }
+  });
+
+  app.on('error', (err) => {
+    if (process.env.NODE_ENV === 'production') {
+      rollbar.log(err);
+    }
+  });
+
   app.use(bodyParser());
   app.use(methodOverride('_method'));
   app.use(serve(path.join(__dirname, 'public')));
@@ -62,33 +89,6 @@ export default () => {
   addRoutes(router, container);
   app.use(router.allowedMethods());
   app.use(router.routes());
-
-  app.use(async (ctx, next) => {
-    try {
-      await next();
-      if (ctx.response.status === 404 && !ctx.response.body) {
-        ctx.throw(404);
-      }
-    } catch (err) {
-      console.log(ctx.url);
-      console.log(err);
-
-      ctx.status = err.status || 500;
-      ctx.body = err.message;
-      ctx.app.emit('error', err, ctx);
-
-      ctx.render('error/index', {
-        status: err.status,
-        message: err.message,
-      });
-    }
-  });
-
-  app.on('error', (err) => {
-    if (process.env.NODE_ENV === 'production') {
-      rollbar.log(err);
-    }
-  });
 
   const pug = new Pug({
     viewPath: path.join(__dirname, 'views'),
