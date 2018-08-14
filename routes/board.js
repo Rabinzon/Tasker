@@ -3,6 +3,7 @@ import { Task, TaskStatus, User, Tag } from '../models';
 import buildFormObj from '../lib/formObjectBuilder';
 
 const allowedSearchQueryAttributes = ['assignedToId', 'statusId', 'creatorId'];
+
 export default (router) => {
   router
     .get('board', '/board', async (ctx) => {
@@ -22,27 +23,15 @@ export default (router) => {
 
       query = _.pick(query, allowedSearchQueryAttributes);
 
+      const tasks = await Task
+        .scope({ method: ['default', tagQuery] })
+        .findAll({ where: query });
+
       const users = await User.findAll();
       const tags = await Tag.findAll();
-      const tasks = await Task.findAll({
-        include: [{
-          model: User,
-          as: 'creator',
-        }, {
-          model: User,
-          as: 'assignedTo',
-        }, {
-          model: TaskStatus,
-          as: 'status',
-        }, {
-          model: Tag,
-          where: tagQuery,
-        }],
-        where: query,
-      });
-
       const taskStatus = TaskStatus.build();
       const columns = await TaskStatus.findAll();
+
       ctx.render('board/index', {
         f: buildFormObj(taskStatus),
         columns,

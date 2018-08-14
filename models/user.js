@@ -40,9 +40,5 @@ export default (sequelize, DataTypes) => {
       },
     },
   });
-  User.associate = function () {
-    // associations can be defined here
-    // this.hasOne(models.Card, { foreignKey: 'creator' });
-  };
   return User;
 };

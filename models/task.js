@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
   });
 
-  Task.associate = function (models) {
+  Task.associate = (models) => {
     models.Task.belongsTo(models.User, {
       as: 'creator',
       foreignKey: {
@@ -21,7 +21,30 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
     });
-    models.Task.belongsToMany(models.Tag, { through: 'TaskTags', foreignKey: 'taskId', otherKey: 'tagId' });
+    models.Task.belongsToMany(
+      models.Tag,
+      { through: 'TaskTags', foreignKey: 'taskId', otherKey: 'tagId' },
+    );
+  };
+
+  Task.loadScopes = (models) => {
+    Task.addScope('default', tagQuery => ({
+      include: [
+        {
+          model: models.User,
+          as: 'creator',
+        }, {
+          model: models.User,
+          as: 'assignedTo',
+        }, {
+          model: models.TaskStatus,
+          as: 'status',
+        }, {
+          model: models.Tag,
+          where: tagQuery,
+        },
+      ],
+    }));
   };
 
   return Task;
