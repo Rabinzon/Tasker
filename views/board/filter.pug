@@ -2,10 +2,10 @@ mixin filter()
     .container.d-flex.justify-content-end.border.rounded.p-2.mb-5
       .navbar-brand.mr-4(href='#') Filter:
       form.form-row.form-inline.my-2.my-lg-0(url=urlFor('filterBoard'))
-        if isSignedIn()
-          .col.justify-content-end: .custom-control.custom-checkbox.d-inline-flex
-            input#myTasks.custom-control-input(name='my' type='checkbox' checked=query.my)
-            label.custom-control-label(for='myTasks') My tasks
+        .col.justify-content-end: .custom-control.custom-checkbox.d-inline-flex
+          input#myTasks.custom-control-input(name='my' type='checkbox' checked=query.my)
+          label.custom-control-label(for='myTasks') My tasks
+
         .col: select(name='tagId').custom-select.w-100
           if !_.has(query, 'tagId')
             option(disabled selected value='') tag

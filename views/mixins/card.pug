@@ -19,65 +19,54 @@ mixin addTagBtn(props, taskId)
       button.badge.badge-dark(type="submit") x
 
 mixin removeTagBtn(props, taskId)
-    if isSignedIn()
-      +formFor(f, {url: urlFor('removeTagToTask', taskId, {query: '_method=delete'}), method: 'post'}).d-inline-flex
-        input(type='hidden' name='form[tagId]' value=props.id)
-        button.badge.badge-info(type='submit')=props.name + ' x'
-    else
-      .badge.badge-info=props.name
+  +formFor(f, {url: urlFor('removeTagToTask', taskId, {query: '_method=delete'}), method: 'post'}).d-inline-flex
+    input(type='hidden' name='form[tagId]' value=props.id)
+    button.badge.badge-info(type='submit')=props.name + ' x'
 
 mixin card(props)
   .card.my-1(data-toggle="modal" data-target='#cardModal' + props.id)
     .card-body
       .d-flex.justify-content-between.align-items-center.mb-2
-        if isSignedIn()
-          .dropdown.d-inline
-            button.btn-sm(type="button" data-toggle="dropdown") Move to
-            .dropdown-menu.dropdown-menu-righ
-              +formFor(f, {url: urlFor('editTask', props.id, {query: '_method=patch'}), method: 'post'}).px-2
-                select(name='form[statusId]').custom-select.mb-2
-                  each column in columns || []
-                    option(value=column.id selected=column.id === props.statusId)=column.name
-                +button(f, 'submit').btn-primary.btn-block.btn-sm
-                  | Move
+        .dropdown.d-inline
+          button.btn-sm(type="button" data-toggle="dropdown") Move to
+          .dropdown-menu.dropdown-menu-righ
+            +formFor(f, {url: urlFor('editTask', props.id, {query: '_method=patch'}), method: 'post'}).px-2
+              select(name='form[statusId]').custom-select.mb-2
+                each column in columns || []
+                  option(value=column.id selected=column.id === props.statusId)=column.name
+              +button(f, 'submit').btn-primary.btn-block.btn-sm
+                | Move
         .d-flex.align-items-center
-            if !props.assignedTo && isSignedIn()
+            if !props.assignedTo
               .dropdown.d-inline
                 button.btn-sm.mr-2(type="button" data-toggle="dropdown") Assign to
                 +asignToMenu(props)
             if props.assignedTo
-              if isSignedIn()
-                .dropdown.d-inline
-                  a(data-toggle="dropdown")
-                    img.rounded-circle.border.mr-2(
-                    src=props.assignedTo.avatar + '?s=30&d=identicon'
-                    data-toggle="tooltip"
-                    title="assigned to: " + props.assignedTo.fullName
-                    )
-                  +asignToMenu(props)
-              else
-                img.rounded-circle.border.mr-2(
-                src=props.assignedTo.avatar + '?s=30&d=identicon'
-                data-toggle="tooltip"
-                title="assigned to: " + props.assignedTo.fullName
-                )
+              .dropdown.d-inline
+                a(data-toggle="dropdown")
+                  img.rounded-circle.border.mr-2(
+                  src=props.assignedTo.avatar + '?s=30&d=identicon'
+                  data-toggle="tooltip"
+                  title="assigned to: " + props.assignedTo.fullName
+                  )
+                +asignToMenu(props)
             img.rounded-circle.border.border-primary(src=props.creator.avatar + '?s=30&d=identicon' data-toggle="tooltip" title="creator: " + props.creator.fullName)
 
       h6.card-title.mb-0=props.name
       .mb-2
         each tag in props.Tags || []
           button.badge.badge-info=tag.name
-        if isSignedIn()
-          .dropdown.d-inline
-            button.badge.badge-dark(type="button" data-toggle="dropdown") +
-            .dropdown-menu.dropdown-menu-righ.p-1
-              .mb-3
-                each tag in tags || []
-                  +addTagBtn(tag, props.id)
-              .mt-2
-                +formFor(f, {url: urlFor('tag'), method: 'post'}).form-inline
-                  +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
-                  +button(f, type='submit').btn-success.btn-sm.mb-2 + Add new tag
+
+        .dropdown.d-inline
+          button.badge.badge-dark(type="button" data-toggle="dropdown") +
+          .dropdown-menu.dropdown-menu-righ.p-1
+            .mb-3
+              each tag in tags || []
+                +addTagBtn(tag, props.id)
+            .mt-2
+              +formFor(f, {url: urlFor('tag'), method: 'post'}).form-inline
+                +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
+                +button(f, type='submit').btn-success.btn-sm.mb-2 + Add new tag
 
       p.card-text=props.text
 

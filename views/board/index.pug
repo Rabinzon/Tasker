@@ -11,10 +11,9 @@ block board
         cards: cards
       }, index)
 
-    if isSignedIn()
-      .p-1: .column
-        .border.p-2
-          +formFor(f, {url: 'column', method: 'post'})
-            +input(f, 'name', {required: true})
-            +button(f, type='submit', 'btn-success')
-              | Create column
+    .p-1: .column
+      .border.p-2
+        +formFor(f, {url: 'column', method: 'post'})
+          +input(f, 'name', {required: true})
+          +button(f, type='submit', 'btn-success')
+            | Create column
