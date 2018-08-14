@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { Task, TaskStatus, User, Tag } from '../models';
 import buildFormObj from '../lib/formObjectBuilder';
 
-const allowedSearchQueryAttributes = ['assignedToId', 'statusId'];
+const allowedSearchQueryAttributes = ['assignedToId', 'statusId', 'creatorId'];
 export default (router) => {
   router
     .get('board', '/board', async (ctx) => {
