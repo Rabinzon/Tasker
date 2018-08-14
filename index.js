@@ -106,6 +106,5 @@ export default () => {
   });
   pug.use(app);
 
-
   return app;
 };
