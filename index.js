@@ -21,7 +21,11 @@ import webpackConfig from './webpack.config.babel';
 import addRoutes from './routes';
 import container from './container';
 
-const rollbar = new Rollbar(process.env.ROLLBAR_TOKEN);
+let rollbar = {};
+
+if (process.env.NODE_ENV === 'production') {
+  rollbar = new Rollbar(process.env.ROLLBAR_TOKEN);
+}
 
 export default () => {
   const app = new Koa();
