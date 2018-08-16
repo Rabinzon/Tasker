@@ -13,7 +13,7 @@ block board
 
     .p-1: .column
       .border.p-2
-        +formFor(f, {url: 'column', method: 'post'})
+        +formFor(f, {url: 'columns', method: 'post'})
           +input(f, 'name', {required: true})
           +button(f, type='submit', 'btn-success')
             | Create column

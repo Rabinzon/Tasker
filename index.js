@@ -1,9 +1,7 @@
 // @flow
-
-// import 'babel-polyfill';
-
-import path from 'path';
+import _ from 'lodash';
 import Koa from 'koa';
+import path from 'path';
 import Pug from 'koa-pug';
 import Router from 'koa-router';
 import koaLogger from 'koa-logger';
@@ -13,8 +11,6 @@ import bodyParser from 'koa-bodyparser';
 import session from 'koa-generic-session';
 import flash from 'koa-flash-simple';
 import Rollbar from 'rollbar';
-
-import _ from 'lodash';
 import methodOverride from 'koa-methodoverride';
 
 import webpackConfig from './webpack.config.babel';
@@ -50,8 +46,6 @@ export default () => {
         ctx.throw(404);
       }
     } catch (err) {
-      console.log(ctx.url, err);
-
       ctx.status = err.status || 500;
       ctx.body = err.message;
       ctx.app.emit('error', err, ctx);
@@ -67,6 +61,7 @@ export default () => {
     if (process.env.NODE_ENV === 'production') {
       rollbar.log(err);
     }
+    console.log(err);
   });
 
   app.use(bodyParser());

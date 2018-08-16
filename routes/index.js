@@ -5,11 +5,13 @@ import board from './board';
 import columns from './columns';
 import profile from './profile';
 import tags from './tags';
-import cards from './tasks';
+import tasks from './tasks';
+import taskTags from './taskTags';
+import taskExecutor from './taskExecutor';
 
 const controllers = [
   welcome, users, sessions, board, columns,
-  tags, cards, profile,
+  tags, tasks, profile, taskTags, taskExecutor,
 ];
 
 export default (router, container) => controllers.forEach(f => f(router, container));

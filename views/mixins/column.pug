@@ -30,7 +30,7 @@ mixin column(props)
 
       .mt-2
         .collapse(id='collapse' + props.id)
-          +formFor(f, {url: urlFor('tasks'), method: 'post'}).form-inline
+          +formFor(f, {url: urlFor('newTask'), method: 'post'}).form-inline
             +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
             input(type='hidden' name='form[statusId]' value=props.id)
             +button(f, type='submit').btn-success.btn-sm.mb-2 Add task

@@ -2,25 +2,25 @@ include /mixins/cardModal
 
 mixin asignToMenu(props)
     .dropdown-menu.dropdown-menu-righ
-      +formFor(f, {url: urlFor('editTask', props.id, {query: '_method=patch'}), method: 'post'}).px-2
+      +formFor(f, {url: urlFor('assign', props.id, {query: '_method=patch'}), method: 'post'}).px-2
         select(name='form[assignedToId]').custom-select.mb-2
-          option(value='default') default
           each user in users || []
             option(value=user.id selected=user.id === props.assignedToId)=user.fullName
         +button(f, 'submit').btn-primary.btn-block.btn-sm
           | Assign
+      +formFor(f, {url: urlFor('deleteAssignedTo', props.id, {query: '_method=delete'}), method: 'post'}).px-2
+        +button(f, 'submit').btn-danger.btn-block.btn-sm
+          | Remove
 
 mixin addTagBtn(props, taskId)
   .d-flex
-    +formFor(f, {url: urlFor('addTagToTask', taskId), method: 'post'})
-      input(type='hidden' name='form[tagId]' value=props.id)
+    +formFor(f, {url: urlFor('addTagToTask', taskId, props.id), method: 'post'})
       button.badge.badge-info(type='submit')=props.name
     +formFor(f, {url: urlFor('deleteTag', props.id, {query: '_method=delete'}), method: 'post'})
       button.badge.badge-dark(type="submit") x
 
 mixin removeTagBtn(props, taskId)
-  +formFor(f, {url: urlFor('removeTagToTask', taskId, {query: '_method=delete'}), method: 'post'}).d-inline-flex
-    input(type='hidden' name='form[tagId]' value=props.id)
+  +formFor(f, {url: urlFor('removeTagToTask', taskId, props.id, {query: '_method=delete'}), method: 'post'}).d-inline-flex
     button.badge.badge-info(type='submit')=props.name + ' x'
 
 mixin card(props)
@@ -64,7 +64,7 @@ mixin card(props)
               each tag in tags || []
                 +addTagBtn(tag, props.id)
             .mt-2
-              +formFor(f, {url: urlFor('tag'), method: 'post'}).form-inline
+              +formFor(f, {url: urlFor('tags'), method: 'post'}).form-inline
                 +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
                 +button(f, type='submit').btn-success.btn-sm.mb-2 + Add new tag
 

@@ -46,7 +46,7 @@ mixin cardModal(props)
                     each tag in tags || []
                       +addTagBtn(tag, props.id)
 
-                  +formFor(f, {url: urlFor('tag'), method: 'post'}).form-inline
+                  +formFor(f, {url: urlFor('tags'), method: 'post'}).form-inline
                     +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
                     +button(f, type='submit').btn-success.btn-sm.mb-2 Add tag
             p.card-text=props.text
