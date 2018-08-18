@@ -2,8 +2,9 @@ include /mixins/cardModal
 
 mixin asignToMenu(props)
     .dropdown-menu.dropdown-menu-righ
-      +formFor(f, {url: urlFor('assign', props.id, {query: '_method=patch'}), method: 'post'}).px-2
+      +formFor(f, {url: urlFor('editTask', props.id, {query: '_method=patch'}), method: 'post'}).px-2
         select(name='form[assignedToId]').custom-select.mb-2
+          option(value='') assign to
           each user in users || []
             option(value=user.id selected=user.id === props.assignedToId)=user.fullName
         +button(f, 'submit').btn-primary.btn-block.btn-sm

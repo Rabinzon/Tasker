@@ -14,6 +14,7 @@ export default (router) => {
     })
     .post('users', '/users', async (ctx) => {
       const { form } = ctx.request.body;
+
       const avatar = gravatar.url(form.email);
       const userFields = { ...form, avatar };
       const user = User.build(userFields);

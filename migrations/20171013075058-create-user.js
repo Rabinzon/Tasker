@@ -9,12 +9,14 @@ module.exports = {
     },
     email: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
     avatar: {
       type: Sequelize.STRING,
     },
     passwordDigest: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
     firstName: {
       type: Sequelize.STRING,
