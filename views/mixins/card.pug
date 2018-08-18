@@ -57,7 +57,8 @@ mixin card(props)
           button.badge.badge-info=tag.name
 
         .dropdown.d-inline
-          button.badge.badge-dark(type="button" data-toggle="dropdown") +
+          button.badge.badge-dark(type="button" data-toggle="dropdown")
+            a(data-toggle="tooltip" data-placement="top" title="add tag") +
           .dropdown-menu.dropdown-menu-righ.p-1
             .mb-3
               each tag in tags || []
