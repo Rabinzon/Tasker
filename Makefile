@@ -10,6 +10,8 @@ test:
 lint:
 	npm run lint
 
+check: test lint
+
 compose:
 	docker-compose up
 
