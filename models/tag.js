@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
     },
+    color: {
+      type: DataTypes.STRING,
+      default: 'primary',
+    },
   }, {});
 
   Tag.associate = (models) => {

@@ -12,15 +12,45 @@ mixin asignToMenu(props)
           | Assign
 
 mixin addTagBtn(props, taskId)
-  .d-flex
+  .d-inline-flex
     +formFor(f, {url: urlFor('addTagToTask', taskId, props.id), method: 'post'})
-      button.badge.badge-info(type='submit')=props.name
+      button.badge.border-0(class='badge-' + props.color)(type='submit')=props.name
     +formFor(f, {url: urlFor('deleteTag', props.id, {query: '_method=delete'}), method: 'post'})
-      button.badge.badge-dark(type="submit") x
+      button.badge.border-0.badge-dark(type="submit") x
 
 mixin removeTagBtn(props, taskId)
   +formFor(f, {url: urlFor('removeTagToTask', taskId, props.id, {query: '_method=delete'}), method: 'post'}).d-inline-flex
-    button.badge.badge-info(type='submit')=props.name + ' x'
+    button.border-0.badge.badge-info(type='submit')=props.name + ' x'
+
+mixin tagColorsSelect
+  - const colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark']
+  .font-weight-bold.w-100 Tag color:
+  each color in colors || []
+    .form-check.mb-1.mr-1
+      input.form-check-input(type='radio', name='form[color]', value=color)
+      label.form-check-label(for='form[color]')
+        .badge(class='badge-' + color)=color
+
+
+mixin tags(props)
+  each tag in props.Tags || []
+    button.border-0.badge(class='badge-' + tag.color)=tag.name
+
+  .dropdown.d-inline
+    button.badge.badge-dark(type="button" data-toggle="dropdown")
+      a(data-toggle="tooltip" data-placement="top" title="add tag") +
+    .dropdown-menu.dropdown-menu-righ.p-1
+      .mb-3
+        .font-weight-bold Select tag:
+
+        each tag in tags || []
+          +addTagBtn(tag, props.id)
+      .mt-2
+        .font-weight-bold Create new tag:
+        +formFor(f, {url: urlFor('tags'), method: 'post'}).form-inline
+          +input(f, 'name', {required: true})(placeholder='Tag name').form-control-sm.mr-2.mb-2
+          +tagColorsSelect
+          +button(f, type='submit').btn-success.btn-sm.mb-2.mt-2 + Create new tag
 
 mixin card(props)
   .card.my-1(data-toggle="modal" data-target='#cardModal' + props.id)
@@ -52,21 +82,9 @@ mixin card(props)
             img.rounded-circle.border.border-primary(src=props.creator.avatar + '?s=30&d=identicon' data-toggle="tooltip" title="creator: " + props.creator.fullName)
 
       h6.card-title.mb-0=props.name
-      .mb-2
-        each tag in props.Tags || []
-          button.badge.badge-info=tag.name
 
-        .dropdown.d-inline
-          button.badge.badge-dark(type="button" data-toggle="dropdown")
-            a(data-toggle="tooltip" data-placement="top" title="add tag") +
-          .dropdown-menu.dropdown-menu-righ.p-1
-            .mb-3
-              each tag in tags || []
-                +addTagBtn(tag, props.id)
-            .mt-2
-              +formFor(f, {url: urlFor('tags'), method: 'post'}).form-inline
-                +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
-                +button(f, type='submit').btn-success.btn-sm.mb-2 + Add new tag
+      .mb-2
+        +tags(props)
 
       p.card-text=props.text
 

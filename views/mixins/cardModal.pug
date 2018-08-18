@@ -37,18 +37,7 @@ mixin cardModal(props)
           .modal-body
             h6.card-title.mb-0=props.name
             .mb-2
-              each tag in props.Tags || []
-                +removeTagBtn(tag, props.id)
-              .dropdown.d-inline
-                button.badge.badge-dark(type="button" data-toggle="dropdown") +
-                .dropdown-menu.dropdown-menu-righ.p-1
-                  .mb-3
-                    each tag in tags || []
-                      +addTagBtn(tag, props.id)
-
-                  +formFor(f, {url: urlFor('tags'), method: 'post'}).form-inline
-                    +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
-                    +button(f, type='submit').btn-success.btn-sm.mb-2 Add tag
+              +tags(props)
             p.card-text=props.text
             p.card-text=props.description || 'Click \'Edit\' to add card description'
 
