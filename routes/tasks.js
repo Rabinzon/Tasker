@@ -1,5 +1,5 @@
 import { Task, User, TaskStatus } from '../models';
-import buildFormObj from '../lib/formObjectBuilder';
+import { buildFormObj, replaceFormEmptyValueWithNull } from '../lib/';
 
 export default (router) => {
   router
@@ -18,7 +18,7 @@ export default (router) => {
 
       const task = await Task.findById(ctx.params.id);
 
-      await task.update(form);
+      await task.update(replaceFormEmptyValueWithNull(form));
 
       ctx.flash.set({ msg: `Task ${task.name} has been updated` });
       ctx.redirect(router.url('board'));

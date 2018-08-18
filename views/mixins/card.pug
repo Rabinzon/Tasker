@@ -7,11 +7,9 @@ mixin asignToMenu(props)
           option(value='') assign to
           each user in users || []
             option(value=user.id selected=user.id === props.assignedToId)=user.fullName
+
         +button(f, 'submit').btn-primary.btn-block.btn-sm
           | Assign
-      +formFor(f, {url: urlFor('deleteAssignedTo', props.id, {query: '_method=delete'}), method: 'post'}).px-2
-        +button(f, 'submit').btn-danger.btn-block.btn-sm
-          | Remove
 
 mixin addTagBtn(props, taskId)
   .d-flex

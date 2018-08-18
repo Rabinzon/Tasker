@@ -1,11 +1,11 @@
 import gravatar from 'gravatar';
 import { User } from '../models';
-import buildFormObj from '../lib/formObjectBuilder';
+import { buildFormObj, maxUsersLimit } from '../lib/';
 
 export default (router) => {
   router
     .get('users', '/users', async (ctx) => {
-      const users = await User.findAll();
+      const users = await User.findAll({ limit: maxUsersLimit });
       ctx.render('users', { users });
     })
     .get('newUser', '/users/new', (ctx) => {

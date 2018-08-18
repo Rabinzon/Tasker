@@ -7,11 +7,10 @@ import profile from './profile';
 import tags from './tags';
 import tasks from './tasks';
 import taskTags from './taskTags';
-import taskExecutor from './taskExecutor';
 
 const controllers = [
   welcome, users, sessions, board, columns,
-  tags, tasks, profile, taskTags, taskExecutor,
+  tags, tasks, profile, taskTags,
 ];
 
 export default (router, container) => controllers.forEach(f => f(router, container));

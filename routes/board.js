@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { Task, TaskStatus, User, Tag } from '../models';
-import buildFormObj from '../lib/formObjectBuilder';
+import { buildFormObj, maxUsersLimit } from '../lib/';
 
 const allowedSearchQueryAttributes = ['assignedToId', 'statusId', 'creatorId'];
 
@@ -27,7 +27,7 @@ export default (router) => {
         .scope({ method: ['default', tagQuery] })
         .findAll({ where: query });
 
-      const users = await User.findAll();
+      const users = await User.findAll({ limit: maxUsersLimit });
       const tags = await Tag.findAll();
       const taskStatus = TaskStatus.build();
       const columns = await TaskStatus.findAll();
