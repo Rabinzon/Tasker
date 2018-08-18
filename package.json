@@ -10,14 +10,16 @@
     "node": "9"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "snapshotSerializers": [
+      "jest-serializer-html"
+    ]
   },
   "scripts": {
     "gulp": "gulp",
     "sequelize": "sequelize",
-    "create-migration": "node ./node_modules/sequelize-auto-migrations/bin/makemigration",
     "nodemon": "nodemon",
-    "test": "NODE_ENV=test jest --forceExit",
+    "test": "NODE_ENV=test jest",
     "babel-node": "babel-node",
     "server": "babel-node bin/index.js",
     "flow": "flow",
@@ -26,6 +28,7 @@
     "eslint": "eslint",
     "lint": "eslint .",
     "webpack": "webpack",
+    "jest-html": "jest-html",
     "migration": "sequelize db:migrate",
     "build": "npm run webpack -- -p --env production",
     "postinstall": "npm run build && npm run migration"
@@ -77,10 +80,8 @@
     "lodash": "^4.17.10",
     "mime": "^2.3.1",
     "pg": "^7.4.3",
-    "popper.js": "^1.14.3",
     "rollbar": "^2.4.2",
     "sequelize": "^4.38.0",
-    "sequelize-auto-migrations": "^1.0.2",
     "sequelize-cli": "^4.0.0",
     "sequelize-test-setup": "0.0.4",
     "sqlite3": "^4.0.2",
@@ -106,6 +107,7 @@
     "flow-bin": "^0.56.0",
     "flow-typed": "^2.4.0",
     "jest-cli": "^23.1.0",
+    "jest-serializer-html": "^5.0.0",
     "jest-supertest-matchers": "0.0.1",
     "json-loader": "^0.5.7",
     "node-sass": "^4.9.2",

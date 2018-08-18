@@ -4,6 +4,12 @@ prepare:
 	touch .bash_history
 	touch .env
 
+test:
+	npm run test
+
+lint:
+	npm run lint
+
 compose:
 	docker-compose up
 

@@ -18,13 +18,16 @@ describe('app', () => {
     it('GET 200', async () => {
       const res = await request.agent(server)
         .get('/');
+
       expect(res).toHaveHTTPStatus(200);
+      expect(res.text).toMatchSnapshot();
     });
 
     it('GET 404', async () => {
       const res = await request.agent(server)
         .get('/wrong-path');
       expect(res).toHaveHTTPStatus(404);
+      expect(res.text).toMatchSnapshot();
     });
   });
 
@@ -33,6 +36,7 @@ describe('app', () => {
       const res = await request.agent(server)
         .get('/session/new');
       expect(res).toHaveHTTPStatus(200);
+      expect(res.text).toMatchSnapshot();
     });
 
     it('CREATE user', async () => {

@@ -1,0 +1,350 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app requests GET 200 1`] = `
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+    </title>
+    <script src="/assets/main.js">
+    </script>
+  </head>
+  <body>
+    <div class="collapse">
+      <div class="bg-dark p-4">
+        <h4 class="text-white">
+          Collapsed content
+        </h4>
+        <span class="text-muted">
+          Toggleable via the navbar brand.
+        </span>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand"
+         href="/"
+      >
+        <i class="fas fa-cookie mb-1 mr-2">
+        </i>
+        Task Manager
+      </a>
+      <button class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+      >
+        <span class="navbar-toggler-icon">
+        </span>
+      </button>
+      <div class="collapse navbar-collapse"
+           id="navbarSupportedContent"
+      >
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/users"
+            >
+              Users
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/session/new"
+            >
+              Sign In
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/users/new"
+            >
+              Sign Up
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="container-fluid mt-5 p-0">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-6 pt-5">
+            <h1>
+              Hello there!
+            </h1>
+            <p class="lead">
+              This is another one simple task manager application! Not SPA, it works on server side only. I used bootstrap, node.js, koa.js, sequelize.js and postgres as a db.
+              Deployed on heroku.
+              <br>
+              All source code you can see on&nbsp;
+              <a href="https://github.com/Rabinzon/tasker">
+                github
+              </a>
+            </p>
+            <p class="lead">
+              <a class="btn btn-lg btn-outline-primery mr-2"
+                 href="/users/new"
+              >
+                Sign up
+              </a>
+              <a class="btn btn-lg btn-outline-info"
+                 href="/session/new"
+              >
+                Sign in
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">
+          Task Manager by &nbsp;
+        </span>
+        <a href="https://github.com/rabinzon/">
+          @rabinzon
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+`;
+
+exports[`app requests GET 404 1`] = `
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+    </title>
+    <script src="/assets/main.js">
+    </script>
+  </head>
+  <body>
+    <div class="collapse">
+      <div class="bg-dark p-4">
+        <h4 class="text-white">
+          Collapsed content
+        </h4>
+        <span class="text-muted">
+          Toggleable via the navbar brand.
+        </span>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand"
+         href="/"
+      >
+        <i class="fas fa-cookie mb-1 mr-2">
+        </i>
+        Task Manager
+      </a>
+      <button class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+      >
+        <span class="navbar-toggler-icon">
+        </span>
+      </button>
+      <div class="collapse navbar-collapse"
+           id="navbarSupportedContent"
+      >
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/users"
+            >
+              Users
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/session/new"
+            >
+              Sign In
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/users/new"
+            >
+              Sign Up
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="container-fluid mt-5 p-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="error-template">
+              <h1>
+                Oops!
+              </h1>
+              <h2>
+                404 Not Found
+              </h2>
+              <div class="error-details">
+                Sorry, an error has occured!
+              </div>
+              <div class="error-actions mt-3">
+                <a class="btn btn-outline-primary btn-md"
+                   href="/"
+                >
+                  Take Me Home
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">
+          Task Manager by &nbsp;
+        </span>
+        <a href="https://github.com/rabinzon/">
+          @rabinzon
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+`;
+
+exports[`app users crud with session GET session 1`] = `
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+    </title>
+    <script src="/assets/main.js">
+    </script>
+  </head>
+  <body>
+    <div class="collapse">
+      <div class="bg-dark p-4">
+        <h4 class="text-white">
+          Collapsed content
+        </h4>
+        <span class="text-muted">
+          Toggleable via the navbar brand.
+        </span>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand"
+         href="/"
+      >
+        <i class="fas fa-cookie mb-1 mr-2">
+        </i>
+        Task Manager
+      </a>
+      <button class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+      >
+        <span class="navbar-toggler-icon">
+        </span>
+      </button>
+      <div class="collapse navbar-collapse"
+           id="navbarSupportedContent"
+      >
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/users"
+            >
+              Users
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/session/new"
+            >
+              Sign In
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+               href="/users/new"
+            >
+              Sign Up
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="container-fluid mt-5 p-0">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col-6">
+            <form class="form"
+                  action="/session"
+                  method="post"
+            >
+              <h1 class="h3 mb-3 font-weight-normal">
+                Please sign in
+              </h1>
+              <div class="form-group">
+                <label>
+                  Email
+                </label>
+                <input class="form-control"
+                       name="form[email]"
+                       required="required"
+                       placeholder="Email"
+                       type="email"
+                       value
+                >
+              </div>
+              <div class="form-group">
+                <label>
+                  Password
+                </label>
+                <input class="form-control"
+                       name="form[password]"
+                       required="required"
+                       placeholder="Password"
+                       type="password"
+                       value
+                >
+              </div>
+              <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block"
+                        type="submit"
+                        value="Save"
+                >
+                  Sign in
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">
+          Task Manager by &nbsp;
+        </span>
+        <a href="https://github.com/rabinzon/">
+          @rabinzon
+        </a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+`;
