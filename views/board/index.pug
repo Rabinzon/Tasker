@@ -3,17 +3,18 @@ include /board/filter
 
 block board
   +filter
-  .d-flex.board.mb-5.pb-5.pl-2
-    each column, index in columns || []
-      +column({
-        id: column.id,
-        name: column.name,
-        cards: cards
-      }, index)
+  .container.mb-5.pb-5.pl-2
+    .row
+      each column, index in columns || []
+        +column({
+          id: column.id,
+          name: column.name,
+          cards: cards
+        }, index)
 
-    .p-1: .column
-      .border.p-2
-        +formFor(f, {url: 'columns', method: 'post'})
-          +input(f, 'name', {required: true})
-          +button(f, type='submit', 'btn-success')
-            | Create column
+      .col.p-1
+        .border.p-2
+          +formFor(f, {url: 'columns', method: 'post'})
+            +input(f, 'name', {required: true})(placeholder='Column name')
+            +button(f, type='submit', 'btn-success')
+              | Create column

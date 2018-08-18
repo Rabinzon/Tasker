@@ -1,8 +1,8 @@
 include /mixins/card.pug
 
 mixin column(props)
-  .p-1
-    .border.p-2.column.p-1
+  .col.p-1
+    .border.p-2.column.p-1.mb-3
       .row.js-title.justify-content-between
         .col-9
           h4=props.name
@@ -31,7 +31,7 @@ mixin column(props)
       .mt-2
         .collapse(id='collapse' + props.id)
           +formFor(f, {url: urlFor('newTask'), method: 'post'}).form-inline
-            +input(f, 'name', {required: true}).form-control-sm.mr-2.mb-2
+            +input(f, 'name', {required: true})(placeholder='Task name').form-control-sm.mr-2.mb-2
             input(type='hidden' name='form[statusId]' value=props.id)
             +button(f, type='submit').btn-success.btn-sm.mb-2 Add task
         a.btn.btn-link.text-muted(data-toggle='collapse', href='#collapse' + props.id, role='button', aria-expanded='false', aria-controls='collapse' + props.id)
