@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import { Task, TaskStatus, User, Tag } from '../models';
-import { buildFormObj, maxUsersLimit } from '../lib/';
+import { buildFormObj, maxUsersLimit, requiredAuth } from '../lib/';
 
 const allowedSearchQueryAttributes = ['assignedToId', 'statusId', 'creatorId'];
 
 export default (router) => {
   router
-    .get('board', '/board', async (ctx) => {
+    .get('board', '/board', requiredAuth, async (ctx) => {
       let query = { ...ctx.query };
 
       if (_.has(query, 'my')) {

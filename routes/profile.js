@@ -1,20 +1,20 @@
 import { User } from '../models';
-import buildFormObj from '../lib/formObjectBuilder';
+import { buildFormObj, requiredAuth } from '../lib/';
 
 export default (router) => {
   router
-    .get('profile', '/profile/edit', async (ctx) => {
+    .get('profile', '/profile/edit', requiredAuth, async (ctx) => {
       const user = await User.findById(ctx.state.userId);
       ctx.render('users/settings', { f: buildFormObj(user), avatar: user.avatar });
     })
-    .delete('profile', '/profile/edit', async (ctx) => {
+    .delete('profile', '/profile/edit', requiredAuth, async (ctx) => {
       const user = await User.findById(ctx.state.userId);
       await user.destroy();
       ctx.session = {};
       ctx.flash.set({ msg: 'User has been deleted' });
       ctx.redirect(router.url('root'));
     })
-    .post('profile', '/profile/edit', async (ctx) => {
+    .post('profile', '/profile/edit', requiredAuth, async (ctx) => {
       const { form } = ctx.request.body;
       const user = await User.findById(ctx.state.userId);
 

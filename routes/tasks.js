@@ -1,8 +1,20 @@
 import { Task, User, TaskStatus } from '../models';
-import { buildFormObj, replaceFormEmptyValueWithNull } from '../lib/';
+import { buildFormObj, replaceFormEmptyValueWithNull, requiredAuth } from '../lib/';
 
 export default (router) => {
   router
+    .get('editTask', '/tasks/:id/edit', requiredAuth, async (ctx) => {
+      const task = await Task.findById(ctx.params.id);
+      const columns = await TaskStatus.findAll();
+      const users = await User.findAll();
+
+      ctx.render('task/edit', {
+        f: buildFormObj(task),
+        taskId: ctx.params.id,
+        columns,
+        users,
+      });
+    })
     .post('newTask', '/tasks/new', async (ctx) => {
       const { form } = ctx.request.body;
 
@@ -30,17 +42,5 @@ export default (router) => {
       ctx.flash.set({ msg: `Task ${task.name} has been deleted` });
 
       ctx.redirect(router.url('board'));
-    })
-    .get('editTask', '/tasks/:id/edit', async (ctx) => {
-      const task = await Task.findById(ctx.params.id);
-      const columns = await TaskStatus.findAll();
-      const users = await User.findAll();
-
-      ctx.render('task/edit', {
-        f: buildFormObj(task),
-        taskId: ctx.params.id,
-        columns,
-        users,
-      });
     });
 };

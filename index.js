@@ -77,13 +77,6 @@ export default () => {
   app.use(koaLogger());
 
   const router = new Router();
-  router.use(['/profile/edit', '/board', '/tasks'], async (ctx, next) => {
-    if (!ctx.state.isSignedIn()) {
-      ctx.throw(403, 'Not allowed! Please sign in.');
-      return;
-    }
-    await next();
-  });
 
   addRoutes(router, container);
   app.use(router.allowedMethods());
